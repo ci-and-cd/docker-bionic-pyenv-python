@@ -11,7 +11,7 @@ for layer in $(pwd)/data/image/*/layer.tar; do
     for element in $(tar -tf ${layer} | grep -E '^dev/.*' | sort -r -n); do echo delete ${element}; tar --delete -f ${layer} "${element}" || echo error on delete ${element}; done
     #for element in $(tar -tf ${layer} | grep -E '^etc/'   | sort -r -n); do echo delete ${element}; tar --delete -f ${layer} "${element}" || echo error on delete ${element}; done
 
-    if [ -n "$(tar -tf ${layer} | grep '\.pyenv')" ]; then echo found .nvm in ${layer}; LAYERS+=(${layer}); fi
+    if [ -n "$(tar -tf ${layer} | grep '\.pyenv')" ]; then echo found .pyenv in ${layer}; LAYERS+=(${layer}); fi
 done
 
 echo -e "merge layers '${LAYERS[@]}' into one\n"
@@ -35,6 +35,7 @@ printf -- '%s\n' "${tar_empty_directories[@]}"
 sudo mkdir -p /data/root && sudo chown -R $(whoami):$(id -gn) /data && tar xf $(pwd)/data/layer.tar -C /data/root/
 rm -rf $(pwd)/data/image && sudo rm -f $(pwd)/data/image.tar
 
+find /data/root/home/ubuntu ! -path '/data/root/home/ubuntu' | grep -v '.pyenv' | xargs rm -rf
 rm -rf /data/root/bin
 rm -rf /data/root/etc
 rm -rf /data/root/tmp

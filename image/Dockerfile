@@ -37,7 +37,7 @@ RUN set -ex \
   && rm -rf ~/.pyenv/cache/* \
   && sudo apt-get -q -y autoremove \
   && sudo apt-get -q -y clean && sudo rm -rf /tmp/* && sudo rm -rf /var/cache && sudo rm -rf /var/lib/apt && sudo rm -rf /var/log \
-  && sudo mkdir -p /var/cache/apt/archives/partial && sudo mkdir -p /var/log/apt/
+  && sudo mkdir -p /var/cache/apt/archives/partial && sudo mkdir -p /var/log/apt
 
 
 #RUN set -ex \
