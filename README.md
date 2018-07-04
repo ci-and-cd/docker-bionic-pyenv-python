@@ -1,6 +1,6 @@
 # docker-bionic-pyenv-python
 
-Node.js (nvm) for multi-stage docker image build.
+Python (pyenv) for multi-stage docker image build.
 
 Dockerfile [ci-and-cd/docker-bionic-pyenv-python on Github](https://github.com/ci-and-cd/docker-bionic-pyenv-python)
 
@@ -10,6 +10,6 @@ Dockerfile [ci-and-cd/docker-bionic-pyenv-python on Github](https://github.com/c
 
 ```dockerfile
 FROM alpine:3.7
-COPY --from=cirepo/bionic-pyenv-python:9.11.1-archive /data/root /
+COPY --from=cirepo/bionic-pyenv-python:2.7.14_3.6.5-archive /data/root /
 RUN sudo chown -R $(whoami):$(id -gn) /home/$(whoami)
 ```
