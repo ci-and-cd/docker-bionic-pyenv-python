@@ -19,6 +19,7 @@ RUN set -ex \
   && echo "install optional extensions for building python" \
   && sudo apt-get -y install libbz2-dev libreadline-dev libsqlite3-dev \
   && echo "install pyenv and build python" \
+  && echo "TODO fix git's 'Problem with the SSL CA cert' issue" \
   && git config --global http.sslverify false \
   && export USE_GIT_URI=true \
   && curl -L https://raw.github.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash \
