@@ -10,8 +10,8 @@ WORK_DIR=$(pwd)
 if [ -n "${CI_OPT_DOCKER_REGISTRY_PASS}" ] && [ -n "${CI_OPT_DOCKER_REGISTRY_USER}" ]; then echo ${CI_OPT_DOCKER_REGISTRY_PASS} | docker login --password-stdin -u="${CI_OPT_DOCKER_REGISTRY_USER}" docker.io; fi
 
 export IMAGE_PREFIX=${IMAGE_PREFIX:-cirepo};
-export IMAGE_NAME=${IMAGE_NAME:-bionic-pyenv-python}
-export IMAGE_TAG=${IMAGE_ARG_NODE_VERSION:-2.7.14_3.6.5}
+export IMAGE_NAME=${IMAGE_NAME:-pyenv-python}
+export IMAGE_TAG=${IMAGE_ARG_NODE_VERSION:-2.7.14_3.6.5}-bionic
 if [ "${TRAVIS_BRANCH}" != "master" ]; then export IMAGE_TAG=${IMAGE_TAG}-SNAPSHOT; fi
 
 # Build image

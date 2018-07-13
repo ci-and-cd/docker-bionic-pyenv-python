@@ -10,7 +10,7 @@ services:
       - IMAGE_ARG_APT_MIRROR=${IMAGE_ARG_APT_MIRROR:-mirrors.163.com}
       - IMAGE_ARG_PYTHON2_VERSION=${IMAGE_ARG_PYTHON2_VERSION:-2.7.14}
       - IMAGE_ARG_PYTHON3_VERSION=${IMAGE_ARG_PYTHON3_VERSION:-3.6.5}
-    image: ${IMAGE_PREFIX:-cirepo}/${IMAGE_NAME:-bionic-pyenv-python}:${IMAGE_TAG:-2.7.14_3.6.5}
+    image: ${IMAGE_PREFIX:-cirepo}/${IMAGE_NAME:-pyenv-python}:${IMAGE_TAG:-2.7.14_3.6.5-bionic}
   #docker-compose build dumper
   dumper:
     build:
@@ -22,4 +22,4 @@ services:
     build:
       context: .
       dockerfile: Dockerfile_archive
-    image: ${IMAGE_PREFIX:-cirepo}/${IMAGE_NAME:-bionic-pyenv-python}:${IMAGE_TAG:-2.7.14_3.6.5}-archive
+    image: ${IMAGE_PREFIX:-cirepo}/${IMAGE_NAME:-pyenv-python}:${IMAGE_TAG:-2.7.14_3.6.5-bionic}-archive
