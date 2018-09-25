@@ -23,9 +23,9 @@ RUN set -ex \
   && git config --global http.sslverify false \
   && export USE_GIT_URI=true \
   && curl -L https://raw.github.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash \
-  && touch ~/.bash_profile \
-  && echo 'export PATH="${HOME}/.pyenv/bin:${PATH}"' >> ~/.bash_profile \
-  && echo 'if which pyenv > /dev/null; then eval "$(pyenv init -)"; eval "$(pyenv virtualenv-init -)"; fi' >> ~/.bash_profile \
+  && touch ~/.profile \
+  && echo 'export PATH="${HOME}/.pyenv/bin:${PATH}"' >> ~/.profile \
+  && echo 'if which pyenv > /dev/null; then eval "$(pyenv init -)"; eval "$(pyenv virtualenv-init -)"; fi' >> ~/.profile \
   && cp -r /data ~/.pyenv/cache \
   && ls -la ~/.pyenv/cache \
   && if [ ! -f ~/.pyenv/cache/Python-${IMAGE_ARG_PYTHON2_VERSION:-2.7.14}.tar.xz ]; then ${ARIA2C_DOWNLOAD} -d ~/.pyenv/cache -o Python-${IMAGE_ARG_PYTHON2_VERSION:-2.7.14}.tar.xz http://mirrors.sohu.com/python/${IMAGE_ARG_PYTHON2_VERSION:-2.7.14}/Python-${IMAGE_ARG_PYTHON2_VERSION:-2.7.14}.tar.xz; fi \

@@ -14,8 +14,8 @@ FROM ubuntu:18.04
 COPY --from=cirepo/pyenv-python:2.7.14_3.6.5-bionic-archive /data/root /
 RUN sudo chown -R $(whoami):$(id -gn) /home/$(whoami) \
   && sudo apt-get -y install gcc libbz2-dev libsqlite3-dev libssl-dev make zlib1g-dev \
-  && touch home/$(whoami)/.bash_profile \
+  && touch home/$(whoami)/.profile \
   && echo 'export PATH="${HOME}/.pyenv/bin:${PATH}"\
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; eval "$(pyenv virtualenv-init -)"; fi' >> home/$(whoami)/.bash_profile
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; eval "$(pyenv virtualenv-init -)"; fi' | tee -a home/$(whoami)/.profile
 
 ```
