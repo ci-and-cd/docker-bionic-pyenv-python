@@ -1,5 +1,5 @@
 
-FROM cirepo/nix:2.0.4-bionic
+FROM cirepo/nix:2.1.1-bionic
 
 
 ARG IMAGE_ARG_APT_MIRROR
@@ -11,6 +11,8 @@ COPY --chown=ubuntu:ubuntu docker /data
 
 
 # PYTHON_BUILD_MIRROR_URL (use checksum to locate files, hard to maintain)
+# pyenv install 3.5.2, The Python ssl extension was not compiled. Missing the OpenSSL lib
+# see: https://github.com/pyenv/pyenv/issues/950#issuecomment-328191825
 RUN set -ex \
   && sudo sed -i "s/http:\/\/archive.ubuntu.com\/ubuntu\//http:\/\/${IMAGE_ARG_APT_MIRROR:-archive.ubuntu.com}\/ubuntu\//g" /etc/apt/sources.list \
   && sudo apt-get -y update \
@@ -28,12 +30,14 @@ RUN set -ex \
   && echo 'if which pyenv > /dev/null; then eval "$(pyenv init -)"; eval "$(pyenv virtualenv-init -)"; fi' >> ~/.profile \
   && cp -r /data ~/.pyenv/cache \
   && ls -la ~/.pyenv/cache \
-  && if [ ! -f ~/.pyenv/cache/Python-${IMAGE_ARG_PYTHON2_VERSION:-2.7.14}.tar.xz ]; then ${ARIA2C_DOWNLOAD} -d ~/.pyenv/cache -o Python-${IMAGE_ARG_PYTHON2_VERSION:-2.7.14}.tar.xz http://mirrors.sohu.com/python/${IMAGE_ARG_PYTHON2_VERSION:-2.7.14}/Python-${IMAGE_ARG_PYTHON2_VERSION:-2.7.14}.tar.xz; fi \
-  && /bin/bash --login -c "pyenv install -v ${IMAGE_ARG_PYTHON2_VERSION:-2.7.14}" \
-  && if [ ! -f ~/.pyenv/cache/Python-${IMAGE_ARG_PYTHON3_VERSION:-3.6.5}.tar.xz ]; then ${ARIA2C_DOWNLOAD} -d ~/.pyenv/cache -o Python-${IMAGE_ARG_PYTHON3_VERSION:-3.6.5}.tar.xz http://mirrors.sohu.com/python/${IMAGE_ARG_PYTHON3_VERSION:-3.6.5}/Python-${IMAGE_ARG_PYTHON3_VERSION:-3.6.5}.tar.xz; fi \
-  && /bin/bash --login -c "pyenv install -v ${IMAGE_ARG_PYTHON3_VERSION:-3.6.5}" \
+  && if [ ! -f ~/.pyenv/cache/Python-3.5.3.tar.xz ]; then ${ARIA2C_DOWNLOAD} -d ~/.pyenv/cache -o Python-3.5.3.tar.xz ${IMAGE_ARG_PYTHON_MIRROR:-https://www.python.org/ftp/python}/3.5.3/Python-3.5.3.tar.xz; fi \
+  && /bin/bash --login -c "CFLAGS=-I/usr/include/openssl LDFLAGS=-L/usr/lib pyenv install -v 3.5.3" \
+  && if [ ! -f ~/.pyenv/cache/Python-${IMAGE_ARG_PYTHON2_VERSION:-2.7.15}.tar.xz ]; then ${ARIA2C_DOWNLOAD} -d ~/.pyenv/cache -o Python-${IMAGE_ARG_PYTHON2_VERSION:-2.7.15}.tar.xz ${IMAGE_ARG_PYTHON_MIRROR:-https://www.python.org/ftp/python}/${IMAGE_ARG_PYTHON2_VERSION:-2.7.15}/Python-${IMAGE_ARG_PYTHON2_VERSION:-2.7.15}.tar.xz; fi \
+  && /bin/bash --login -c "pyenv install -v ${IMAGE_ARG_PYTHON2_VERSION:-2.7.15}" \
+  && if [ ! -f ~/.pyenv/cache/Python-${IMAGE_ARG_PYTHON3_VERSION:-3.6.6}.tar.xz ]; then ${ARIA2C_DOWNLOAD} -d ~/.pyenv/cache -o Python-${IMAGE_ARG_PYTHON3_VERSION:-3.6.6}.tar.xz ${IMAGE_ARG_PYTHON_MIRROR:-https://www.python.org/ftp/python}/${IMAGE_ARG_PYTHON3_VERSION:-3.6.6}/Python-${IMAGE_ARG_PYTHON3_VERSION:-3.6.6}.tar.xz; fi \
+  && /bin/bash --login -c "pyenv install -v ${IMAGE_ARG_PYTHON3_VERSION:-3.6.6}" \
   && sudo apt-get -y remove gcc git libbz2-dev libsqlite3-dev libssl-dev make zlib1g-dev \
-  && sudo apt-get -y install bzip2 sqlite3 openssl zlib1g \
+  && sudo apt-get -y install bzip2 openssl sqlite3 zlib1g \
   && echo "cleanup" \
   && rm -rf ~/.pyenv/cache/* \
   && sudo apt-get -q -y autoremove \

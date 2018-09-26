@@ -11,7 +11,7 @@ if [ -n "${CI_OPT_DOCKER_REGISTRY_PASS}" ] && [ -n "${CI_OPT_DOCKER_REGISTRY_USE
 
 export IMAGE_PREFIX=${IMAGE_PREFIX:-cirepo};
 export IMAGE_NAME=${IMAGE_NAME:-pyenv-python}
-export IMAGE_TAG=${IMAGE_ARG_NODE_VERSION:-2.7.14_3.6.5}-bionic
+export IMAGE_TAG=${IMAGE_ARG_NODE_VERSION:-2.7.15_3.6.6}-bionic
 if [ "${TRAVIS_BRANCH}" != "master" ]; then export IMAGE_TAG=${IMAGE_TAG}-SNAPSHOT; fi
 
 # Build image

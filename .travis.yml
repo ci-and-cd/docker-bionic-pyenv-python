@@ -13,8 +13,9 @@ dist: trusty
 env:
   global:
   - IMAGE_ARG_APT_MIRROR=archive.ubuntu.com
+  - IMAGE_ARG_PYTHON_MIRROR=https://www.python.org/ftp/python
   matrix:
-  - IMAGE_ARG_PYTHON2_VERSION=2.7.14 IMAGE_ARG_PYTHON3_VERSION=3.6.5
+  - IMAGE_ARG_PYTHON2_VERSION=2.7.15 IMAGE_ARG_PYTHON3_VERSION=3.6.6
 
 group: edge
 #install: true
