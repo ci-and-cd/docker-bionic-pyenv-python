@@ -8,4 +8,4 @@ COPY --chown=ubuntu:ubuntu docker /home/ubuntu/data
 # Process image layers
 RUN cd /home/${USER:-ubuntu} \
   && ./data/dump.sh \
-  sudo chown -R ${USER:-ubuntu}:$(id -gn) /data/root/home/${USER:-ubuntu}
+  && sudo chown -R ${USER:-ubuntu}:$(id -gn) /data/root/home/${USER:-ubuntu}
