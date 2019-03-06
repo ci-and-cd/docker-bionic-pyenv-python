@@ -11,7 +11,7 @@ Dockerfile [ci-and-cd/docker-bionic-pyenv-python on Github](https://github.com/c
 ```dockerfile
 
 FROM ubuntu:18.04
-COPY --from=cirepo/pyenv-python:2.7.15_3.6.6-bionic-archive /data/root /
+COPY --from=cirepo/pyenv-python:2.7.16_3.7.2-bionic-archive /data/root /
 RUN sudo chown -R $(whoami):$(id -gn) /home/$(whoami) \
   && sudo apt-get -y install gcc libbz2-dev libsqlite3-dev libssl-dev make zlib1g-dev \
   && touch home/$(whoami)/.profile \

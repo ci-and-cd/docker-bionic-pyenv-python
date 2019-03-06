@@ -10,9 +10,9 @@ services:
       - IMAGE_ARG_APT_MIRROR=${IMAGE_ARG_APT_MIRROR:-mirrors.163.com}
       #- IMAGE_ARG_PYTHON_MIRROR=${IMAGE_ARG_PYTHON_MIRROR:-http://mirrors.sohu.com/python}
       - IMAGE_ARG_PYTHON_MIRROR=${IMAGE_ARG_PYTHON_MIRROR:-https://www.python.org/ftp/python}
-      - IMAGE_ARG_PYTHON2_VERSION=${IMAGE_ARG_PYTHON2_VERSION:-2.7.15}
-      - IMAGE_ARG_PYTHON3_VERSION=${IMAGE_ARG_PYTHON3_VERSION:-3.6.6}
-    image: ${IMAGE_PREFIX:-cirepo/}${IMAGE_NAME:-pyenv-python}:${IMAGE_TAG:-2.7.15_3.6.6-bionic}
+      - IMAGE_ARG_PYTHON2_VERSION=${IMAGE_ARG_PYTHON2_VERSION:-2.7.16}
+      - IMAGE_ARG_PYTHON3_VERSION=${IMAGE_ARG_PYTHON3_VERSION:-3.7.2}
+    image: ${IMAGE_PREFIX:-cirepo/}${IMAGE_NAME:-pyenv-python}:${IMAGE_TAG:-2.7.16_3.7.2-bionic}
   #docker-compose build dumper
   dumper:
     build:
@@ -24,4 +24,4 @@ services:
     build:
       context: .
       dockerfile: Dockerfile_archive
-    image: ${IMAGE_PREFIX:-cirepo/}${IMAGE_NAME:-pyenv-python}:${IMAGE_TAG:-2.7.15_3.6.6-bionic}-archive
+    image: ${IMAGE_PREFIX:-cirepo/}${IMAGE_NAME:-pyenv-python}:${IMAGE_TAG:-2.7.16_3.7.2-bionic}-archive
